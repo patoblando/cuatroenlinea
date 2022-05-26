@@ -16,3 +16,38 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/jugar/{secuencia}', function ($secuencia) {
+  $secuencia_anterior = $secuencia;
+  $secuencia = str_split($secuencia);
+  $tablero = [
+    array_fill(0, 6, 'gray-200'),
+    array_fill(0, 6, 'gray-200'),
+    array_fill(0, 6, 'gray-200'),
+    array_fill(0, 6, 'gray-200'),
+    array_fill(0, 6, 'gray-200'),
+    array_fill(0, 6, 'gray-200'),
+    array_fill(0, 6, 'gray-200'),
+  ];
+
+  $color = 'sky-500';
+  foreach ($secuencia as $columna) {
+    $color_siguiente = $color;
+    $color = $color == 'sky-500' ? 'red-500' : 'sky-500';
+    foreach ($tablero[$columna - 1] as $fila => $celda) {
+      if ($celda == 'gray-200') {
+        $tablero[$columna - 1][$fila] = $color;
+        continue 2;
+      }
+    }
+  }
+  foreach ($tablero as $columna => $fila) {
+    $tablero[$columna] = array_reverse($fila);
+  }
+
+  return view('tablero', [
+    'tablero' => $tablero,
+    'secuencia_anterior' => $secuencia_anterior,
+    'color_siguiente' => $color_siguiente,
+  ]);
+});
