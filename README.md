@@ -1,10 +1,9 @@
 # Cuatro en linea laravel - Adaptacion de ambientes y trabajos
 
-El juego de 4 en lineas, hecho en php con ddev y laravel, se juega de a dos jugadores.
+Cuatro en linea, desarollado en php con laravev y ddev.
 
 
 ## Prerrequisitos
-Enlaces oficiales a los prerrequisitos:
 - Composer (https://getcomposer.org/download/)
 - DDEV (https://ddev.readthedocs.io/en/stable/)
 - Docker Desktop (https://docs.docker.com/desktop/)
@@ -12,14 +11,14 @@ Enlaces oficiales a los prerrequisitos:
 
 <br/>
 
-## Pasos para que funcione:
+## Instalacion
 
-### Primero descargamos el repositorio en el directorio que lo querramos tener:
+### Primero que nada, clonamos el repositorio en la carpeta que querramos contenerlo:
 
-> ``git clone https://github.com/LeandroSpagnolo/cuatroenlinea.git``
+> ``git clone https://github.com/patoblando/cuatroenlinea.git``
 
 ### 1- Configuracion ddev
-- Abrimos la consola en el directorio del recien descargado y ejecutamos el siguiente comando:
+- Luego ejecutamos el comando:
 
 > ``ddev config``
 
@@ -27,6 +26,7 @@ Enlaces oficiales a los prerrequisitos:
 Nos preguntara el nombre que le queremos dar a nuestro proyecto, este puede ser el que viene por defecto.
 Luego donde queremos guardar la raiz del proyecto, podemos usar la misma en la que estamos.
 Por ultimo nos pregunta que tipo de proyecto es, le decimos que laravel.
+Nos preguntará el nombre del 
 
 Ahora lo podemos iniciar con:
 
