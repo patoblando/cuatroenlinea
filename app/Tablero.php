@@ -6,14 +6,13 @@ use Exception;
 use ColumnaLlenaException;
 
 interface TableroInterf {
-	protected function vaciar_tablero();
 	public function poner_ficha(int $columna, Ficha $ficha);
 }
 
 class Tablero {
-	protected int $ancho
-	protected int $alto
-	protected array $tablero
+	protected int $ancho;
+	protected int $alto;
+	protected array $tablero;
 
 	protected function vaciar_tablero(){
 		for($i = 0; $i < $alto; $i++){
@@ -21,6 +20,10 @@ class Tablero {
 				$this->tablero[i][a] = new Ficha("Vacio");
 			}
 		}
+	}
+	public function __construct(int $alto_input, int $ancho_input){
+			$this->ancho = $ancho_input;
+			$this->alto = $alto_input;			
 	}
 
 	public function poner_ficha(int $columna, Ficha $ficha){
