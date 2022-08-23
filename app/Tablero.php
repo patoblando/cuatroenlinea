@@ -23,13 +23,14 @@ class Tablero {
 	}
 	public function __construct(int $alto_input, int $ancho_input){
 			$this->ancho = $ancho_input;
-			$this->alto = $alto_input;			
+			$this->alto = $alto_input;
+			vaciar_tablero();
 	}
 
 	public function poner_ficha(int $columna, Ficha $ficha){
 		for($columna_contador = $this->alto; $columna_contador != 0; $columna_contador--){
-			if($this->tablero[$columna_contador][$columna]->color =="Vacio"){
-				tablero[$columna_contador][$columna] = $ficha->color;
+			if($this->tablero[$columna_contador][$columna]->color == "Vacio"){
+				$tablero[$columna_contador][$columna] = $ficha;
 				return;
 			}
 		}
