@@ -35,20 +35,20 @@ class Ganador implements GanadorInterface {
 			return $contador;
 		}
 		$ficha = $tablero->tablero[$x][$y];
-		$ficha_sig = $tablero->tablero[$direciones[0]][$direciones[1]];
 
 		if($ficha->color == $ficha_sig->color)
 			chequeo_linea($tablero, $direciones[0], $direciones[1], $iteracion - 1, $contador + 1, $direccion);
 		else return $contador;
 	}
 
+
 	public function chequeo_juego_ganado(Tablero $tablero, Int $x, Int $y, Ficha $ficha){
 		//Quiero fijarme si la ficha esta en contacto con alguna otra
 		//tanto diagonalmente como en sus extremos.
 		$secuencia = 0;
-
+		
 		$ficha = $tablero->tablero[$x][$y];
-
+		
 		$fichaNO = $tablero->tablero[$x - 1][$y + 1];
 		$fichaN  = $tablero->tablero[$x][$y + 1];
 		$fichaNE = $tablero->tablero[$x + 1][$y + 1] ;
