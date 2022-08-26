@@ -13,9 +13,23 @@ class Ganador implements GanadorInterface {
 	//La idea es hacer una funcion recursiva que chequee 3 veces si una ficha
 	//esta en contacto con otra de su mismo color en una direccion inicial
 
-	//TODO: Esto no fuciona, tengo que buscar la forma en que la funcion avance en una direccion. 
-	//Quizas una funcion auxiliar que dados dos int y un string devuelva la direccion adecuada.
-	private function chequeo_linea(Tablero $tablero, $x, $y, $iteracion){ 
+	//TODO: Implementar la funcion direccion al codigo.
+
+	private function direccion(String $direccion, $x, $y){
+		$direcciones = array(
+			'NO' => [$x - 1, $y + 1],
+			'N'  => [$x, $y + 1],
+			'NE' => [$x + 1, $y + 1],
+			'E'  => [$x + 1, $y],
+			'SE' => [$x + 1, $y - 1],
+			'S'  => [$x, $y - 1],
+			'SO' => [$x - 1, $y - 1],
+			'O'  => [$x - 1, $y]
+		);
+		return $direcciones($direccion);
+	}
+
+	private function chequeo_linea(Tablero $tablero, $x, $y, $iteracion){
 		if($iteracion == 0){
 			$this->ganador_bandera = True;
 			$this->ganador = '';
