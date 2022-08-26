@@ -29,23 +29,24 @@ class Ganador implements GanadorInterface {
 		return $direcciones($direccion);
 	}
 
-	private function chequeo_linea(Tablero $tablero, $x, $y, $iteracion){
+	private function chequeo_linea(Tablero $tablero, $x, $y, $iteracion, $contador, $direccion){
+		$direcciones = direccion($direccion);
 		if($iteracion == 0){
-			$this->ganador_bandera = True;
-			$this->ganador = '';
-			return;
+			return $contador;
 		}
 		$ficha = $tablero->tablero[$x][$y];
-		$ficha_sig = $tablero->tablero[$direc_x][$direc_y];
+		$ficha_sig = $tablero->tablero[$direciones[0]][$direciones[1]];
 
 		if($ficha->color == $ficha_sig->color)
-			chequeo_linea($tablero, $direc_x, $direc_y, $x, $y, $iteracion - 1);
-		else return;
+			chequeo_linea($tablero, $direciones[0], $direciones[1], $iteracion - 1, $contador + 1, $direccion);
+		else return $contador;
 	}
 
-	public function chequeo_juego_ganado(Tablero $tablero, Int $x, Int $y){
+	public function chequeo_juego_ganado(Tablero $tablero, Int $x, Int $y, Ficha $ficha){
 		//Quiero fijarme si la ficha esta en contacto con alguna otra
 		//tanto diagonalmente como en sus extremos.
+		$secuencia = 0;
+
 		$ficha = $tablero->tablero[$x][$y];
 
 		$fichaNO = $tablero->tablero[$x - 1][$y + 1];
@@ -57,29 +58,42 @@ class Ganador implements GanadorInterface {
 		$fichaSO = $tablero->tablero[$x - 1][$y - 1];
 		$fichaO  = $tablero->tablero[$x - 1][$y];
 
+		$secuencia_NO_SE = 0;
+		$secuencia_N_S   = 0;
+		$secuencia_NE_SO = 0;
+		$secuencia_E_O   = 0;
+
 		if($ficha->color == $fichaNO->color)
-			chequeoLinea($tablero->tablero, $x - 1, $y + 1, 3);
+			$secuencia_NO_SE += chequeoLinea($tablero->tablero, $x - 1, $y + 1, 3, 0, 'NO');
 
 		if($ficha->color == $fichaN->color)
-			chequeoLinea($tablero->tablero, $x, $y + 1, 3);
+			$secuencia_N_S += chequeoLinea($tablero->tablero, $x, $y + 1, 3, 0, 'N');
 
 		if($ficha->color == $fichaNE->color)
-			chequeoLinea($tablero->tablero, $x + 1, $y + 1, 3);
+			$secuencia_NO_SE += chequeoLinea($tablero->tablero, $x + 1, $y + 1, 3, 0, 'NE');
 
 		if($ficha->color == $fichaE->color)
-			chequeoLinea($tablero->tablero, $x + 1, $y, 3);
+			$secuencia_E_O += chequeoLinea($tablero->tablero, $x + 1, $y, 3, 0, 'E');
 
 		if($ficha->color == $fichaSE->color)
-			chequeoLinea($tablero->tablero, $x + 1, $y - 1, 3);
+			$secuencia_NO_SE += chequeoLinea($tablero->tablero, $x + 1, $y - 1, 3, 0, 'SE');
 
 		if($ficha->color == $fichaS->color)
-			chequeoLinea($tablero->tablero, $x, $y - 1, 3);
+			$secuencia_N_S += chequeoLinea($tablero->tablero, $x, $y - 1, 3, 0, 'S');
 
 		if($ficha->color == $fichaSO->color)
-			chequeoLinea($tablero->tablero, $x - 1, $y - 1, 3);
+			$secuencia_NO_SE += chequeoLinea($tablero->tablero, $x - 1, $y - 1, 3, 0, 'SO');
 
 		if($ficha->color == $fichaO->color)
-			chequeoLinea($tablero->tablero, $x - 1, $y, 3);
+			$secuencia_E_O += chequeoLinea($tablero->tablero, $x - 1, $y, 3, 0, 'O');
+
+		if($secuencia_NO_SE == 4 or
+		   $secuencia_N_S   == 4 or
+		   $secuencia_NE_SO == 4 or
+		   $secuencia_E_O   == 4){
+			$this->ganador = $ficha->color;
+			$this->ganador_bandera = True;
+		}
 
 	}
 }
