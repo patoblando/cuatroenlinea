@@ -1,9 +1,9 @@
 <?php
 
-namespace App; //Asigno el espacio de nombres app para todas las variables, clases y metodos.
+namespace app; //Asigno el espacio de nombres app para todas las variables, clases y metodos.
 
 class Ficha implements FichaInterface {
-	public readonly $color;
+	public readonly $color = "Vacio";
 
 	public function __construct(String $color_ficha){
 		$this->color = $color_ficha;

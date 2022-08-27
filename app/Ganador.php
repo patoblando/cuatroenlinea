@@ -1,6 +1,6 @@
 <?php
 
-namespace App; //Asigno el espacio de nombres app para todas las variables, clases y metodos.
+namespace app; //Asigno el espacio de nombres app para todas las variables, clases y metodos.
 
 interface GanadorInterface {
 
