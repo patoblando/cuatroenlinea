@@ -1,6 +1,7 @@
 <?php
 
-namespace app; //Asigno el espacio de nombres app para todas las variables, clases y metodos. 
+namespace App; //Asigno el espacio de nombres app para todas las variables, clases y metodos. 
+include "Ficha.php";
 
 use Exception;
 use ColumnaLlenaException;
@@ -30,28 +31,43 @@ class Tablero implements TableroInterface {
 	}
 
 	public function poner_ficha(int $columna, Ficha $ficha){
-		for($columna_contador = $this->alto; $columna_contador != 0; $columna_contador--){
+		for($columna_contador = $this->alto - 1; $columna_contador >= 0; $columna_contador--){
 			if($this->tablero[$columna_contador][$columna]->color == "Vacio"){
-				$tablero[$columna_contador][$columna] = $ficha;
+				$this->tablero[$columna_contador][$columna] = $ficha;
 				return;
 			}
 		}
 		throw new ColumnaLlenaException("La columna esta completa.");
 	}
-	public function mostrar_tablero(Tablero $tablero){
-		for($i = 0; $i < $alto; $i++){
-			for($a = 0; $a < $ancho; $a++){
-				if($ficha->color == "Rojo");
-					echo "\e[31mO "; //Printea una O roja.
-				if ($ficha->color == "Azul");
-					echo "\e[34mO"; //Printea una O azul.
-				if($ficha->color == "Vacio");
-				echo "O";
+	public function mostrar_tablero(){
+		for($i = 0; $i < $this->alto; $i++){
+			for($a = 0; $a < $this->ancho; $a++){
+				//echo $this->tablero[$i][$a]->color; echo " ";
+				if($this->tablero[$i][$a]->color == "Rojo")
+					echo "\e[47;31mO\e[0m "; //Printea una O roja.
+				if ($this->tablero[$i][$a]->color == "Azul")
+					echo "\e[47;34mO\e[0m "; //Printea una O azul.
+				if($this->tablero[$i][$a]->color == "Vacio")
+				echo "O ";
 			}
-			echo "/n";
+			echo "\n";
 		}
 
 	}
 }
 
-$tablero = new Tablero(4,4);
+$tablero = new Tablero(4, 4);
+
+$tablero->poner_ficha(1, new Ficha("Azul"));
+$tablero->mostrar_tablero();
+echo "\n";
+$tablero->poner_ficha(1, new Ficha("Azul"));
+$tablero->mostrar_tablero();
+echo "\n";
+$tablero->poner_ficha(1, new Ficha("Azul"));
+$tablero->mostrar_tablero();
+echo "\n";
+
+$tablero->poner_ficha(1, new Ficha("Rojo"));
+$tablero->mostrar_tablero();
+echo "\n";
